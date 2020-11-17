@@ -1,3 +1,7 @@
+import Routes from './Routes'
+
 export default function App() {
-  return (<>Hello world</>)
+  return (
+    <Routes />
+  )
 }
