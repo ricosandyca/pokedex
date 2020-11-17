@@ -3,7 +3,7 @@ import apiConfig from '../../config/api'
 
 export const pokemonListQuery = async (limit, offset = 0) => {
   // retrive pokemon list from API
-  const { data: { results } } = await axios
+  const { data: { results, count } } = await axios
     .get(`${apiConfig.coreUrl}/pokemon?limit=${limit}&offset=${offset}`)
   
   // retrive details of each pokemon list
@@ -18,7 +18,7 @@ export const pokemonListQuery = async (limit, offset = 0) => {
     })
   }
 
-  return pokemons
+  return { count, pokemons }
 }
 
 export const pokemonQuery = async (pokemonId) => {
