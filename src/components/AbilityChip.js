@@ -5,7 +5,7 @@ export default function AbilityChip({ ability, background, color }) {
     <Chip
       label={ability}
       size='small'
-      style={{ background, color, marginRight: '5px', marginTop: '5px' }}
+      style={{ background, color, marginRight: '5px', marginTop: '7.5px' }}
     />
   )
 }
