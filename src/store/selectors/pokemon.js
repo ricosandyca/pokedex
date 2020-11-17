@@ -6,13 +6,18 @@ import apiConfig from '../../config/api'
 export const pokemonListQuery = selector({
   key: 'pokemonListQuery',
   get: async () => {
+    let pokemonList = []
     // retrive pokemon list
-    const { data: pokemonList } = await axios.get(`${apiConfig.coreUrl}/pokemon`)
-    // map pokemon list to have full resolution image url
-    return pokemonList.map(pokemon => ({
-      ...pokemon,
-      _image: `${apiConfig.imageUrl}/images/pokemon/${pokemon.id}.png`
-    }))
+    const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon?limit=12`)
+    // retrive detail each pokemon
+    for (const pokemon of data.results) {
+      const { data: pokemonDetail } = await axios.get(pokemon.url)
+      pokemonList.push({
+        ...pokemonDetail,
+        _image: `${apiConfig.imageUrl}/images/pokemon/${pokemonDetail.id}.png`
+      })
+    }
+    return pokemonList
   }
 })
 
