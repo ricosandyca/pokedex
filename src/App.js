@@ -1,10 +1,17 @@
+import { Suspense } from 'react'
+import { RecoilRoot } from 'recoil'
+
 import Routes from './Routes'
 import withTheme from './hoc/withTheme'
 
-export default function App() {
-  const ThemedRoute = withTheme(Routes)
-
+function App() {
   return (
-    <ThemedRoute />
+    <RecoilRoot>
+      <Suspense fallback={<>Please wait...</>}>
+        <Routes />
+      </Suspense>
+    </RecoilRoot>
   )
 }
+
+export default withTheme(App)

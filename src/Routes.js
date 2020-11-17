@@ -4,14 +4,14 @@ import {
   Route
 } from 'react-router-dom'
 
-import MainRoute from './routes/Main'
+import PokemonListRoute from './routes/PokemonList'
 import NotFoundRoute from './routes/NotFound'
 
 export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path='/' component={MainRoute} exact />
+        <Route path='/' component={PokemonListRoute} exact />
         <Route component={NotFoundRoute} />
       </Switch>
     </Router>
