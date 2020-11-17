@@ -17,7 +17,7 @@ export default function extractImageColor(imgElm) {
   const dominantLighten = currentColor.lighten(.1).hex()
 
   // get contrast text color
-  const isLight = color(dominantLighten).darken(.4).isLight()
+  const isLight = color(dominantLighten).darken(.25).isLight()
   const contrastText = isLight ? '#000' : '#FFF'
 
   return {
