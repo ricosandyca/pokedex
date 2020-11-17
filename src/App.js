@@ -1,12 +1,16 @@
+import { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
 
 import Routes from './Routes'
 import withTheme from './hoc/withTheme'
+import LoadingPage from './components/LoadingPage'
 
 function App() {
   return (
     <RecoilRoot>
-      <Routes />
+      <Suspense fallback={<LoadingPage />}>
+        <Routes />
+      </Suspense>
     </RecoilRoot>
   )
 }
