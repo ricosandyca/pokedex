@@ -7,8 +7,8 @@ export default function initTheme() {
   return createMuiTheme({
     palette: {
       background: {
-        default: '#FFFFFF',
-        paper: '#F5F6FA'
+        default: '#E0E8FD',
+        paper: '#ECF3FE'
       },
       text: {
         primary: generateTextColor(1),
