@@ -4,13 +4,14 @@ import {
   Route
 } from 'react-router-dom'
 
+import MainRoute from './routes/Main'
 import NotFoundRoute from './routes/NotFound'
 
 export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path='/' children='Hello World' exact />
+        <Route path='/' component={MainRoute} exact />
         <Route component={NotFoundRoute} />
       </Switch>
     </Router>
