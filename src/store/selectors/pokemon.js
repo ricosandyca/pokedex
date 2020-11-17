@@ -9,7 +9,7 @@ export const selectPokemonById = selectorFamily({
     let pokemon
     // try to retrive pokemon detail from current state
     const { pokemons } = get(pokemonState)
-    pokemon = pokemons.find(({ id }) => id == pokemonId)
+    pokemon = pokemons.find(({ id }) => id === pokemonId)
     // if pokemon detail found
     if (pokemon) return pokemon
 
