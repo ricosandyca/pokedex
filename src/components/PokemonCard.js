@@ -121,7 +121,7 @@ export default function PokemonCard({ pokemon }) {
       </div>
       <img
         ref={pokemonImageRef}
-        src={pokemon._image}
+        src={pokemon.sprites.other['official-artwork'].front_default}
         alt={pokemon.name}
         className={classes.pokemonImage}
         onLoad={() => setImageLoaded(true)}

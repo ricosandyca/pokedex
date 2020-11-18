@@ -16,11 +16,7 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
   for (const pokemon of data.results) {
     // get pokemon detail
     const { data } = await axios.get(pokemon.url)
-    // push _image attribute to pokemon detail
-    pokemons.push({
-      ...data,
-      _image: `${apiConfig.imageUrl}/images/pokemon/${data.id}.png`
-    })
+    pokemons.push(data)
   }
 
   return {
@@ -38,8 +34,5 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
 export const pokemonQuery = async (pokemonId) => {
   // retrive pokemon detail by id
   const { data: pokemon } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
-  return {
-    ...pokemon,
-    _image: `${apiConfig.imageUrl}/images/pokemon/${pokemon.id}.png`
-  }
+  return pokemon
 }
