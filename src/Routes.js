@@ -6,7 +6,7 @@ import {
 
 import PokemonListRoute from './routes/PokemonList'
 import PokemonDetailRoute from './routes/PokemonDetail'
-import NotFoundRoute from './routes/NotFound'
+import ExceptionRoute from './routes/Exception'
 
 export default function Routes() {
   return (
@@ -14,7 +14,7 @@ export default function Routes() {
       <Switch>
         <Route path='/' component={PokemonListRoute} exact />
         <Route path='/pokemon/:pokemonId' component={PokemonDetailRoute} exact />
-        <Route component={NotFoundRoute} />
+        <Route component={ExceptionRoute} />
       </Switch>
     </Router>
   )

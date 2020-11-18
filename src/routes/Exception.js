@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function NotFound() {
+export default function NotFound({ code = 404, message = 'Page Not Found' }) {
   const classes = useStyles()
 
   return (
@@ -31,13 +31,13 @@ export default function NotFound() {
         style={{ height: '100%' }}
       >
         <Grid item>
-          <Typography variant='h6'>404</Typography>
+          <Typography variant='h6'>{code}</Typography>
         </Grid>
         <Grid item>
           <div className={classes.verticalDivider} />
         </Grid>
         <Grid item>
-          <Typography variant='body2'>Page Not Found</Typography>
+          <Typography variant='body2'>{message}</Typography>
         </Grid>
       </Grid>
     </div>
