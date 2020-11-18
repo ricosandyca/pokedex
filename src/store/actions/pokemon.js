@@ -10,7 +10,7 @@ import apiConfig from '../../config/api'
 export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limit=12`) => {
   // retrive pokemon list from API
   const { data } = await axios.get(next)
-  
+
   // retrive details of each pokemon list
   let pokemons = []
   for (const pokemon of data.results) {
@@ -18,7 +18,9 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
     const { data } = await axios.get(pokemon.url)
     pokemons.push({
       ...data,
-      _name: data.name.replace(/[-]/g, ' ')
+      _name: data.name.replace(/[-]/g, ' '),
+      _image: data.sprites.other['dream_world'].front_default
+        || data.sprites.other['official-artwork'].front_default
     })
   }
 
@@ -39,6 +41,8 @@ export const pokemonQuery = async (pokemonId) => {
   const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
   return {
     ...data,
-    _name: data.name.replace(/[-]/g, ' ')
+    _name: data.name.replace(/[-]/g, ' '),
+    _image: data.sprites.other['dream_world'].front_default
+      || data.sprites.other['official-artwork'].front_default
   }
 }

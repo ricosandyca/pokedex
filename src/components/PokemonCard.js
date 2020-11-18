@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
@@ -87,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function PokemonCard({ pokemon }) {
+  const history = useHistory()
   const [imageLoaded, setImageLoaded] = useState(false)
   const [colors, setColors] = useState({})
   const pokemonImageRef = useRef(null)
@@ -101,6 +103,7 @@ export default function PokemonCard({ pokemon }) {
 
   return (
     <Paper
+      onClick={() => history.push(`/pokemon/${pokemon.id}`)}
       classes={{ root: classes.paper }}
       elevation={0}
       style={{
@@ -121,8 +124,8 @@ export default function PokemonCard({ pokemon }) {
       </div>
       <img
         ref={pokemonImageRef}
-        src={pokemon.sprites.other['official-artwork'].front_default}
-        alt={pokemon.name}
+        src={pokemon._image}
+        alt={pokemon._name}
         className={classes.pokemonImage}
         onLoad={() => setImageLoaded(true)}
         crossOrigin='anonymous'
