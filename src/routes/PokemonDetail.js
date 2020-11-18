@@ -6,20 +6,28 @@ import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import PokemonTypeIcon from '../components/PokemonTypeIcon'
-import extractImageColor from '../utils/image-color-extractor'
+import PokemonStatList from '../components/PokemonStatList'
 import { selectPokemonById } from '../store/selectors/pokemon'
+import extractImageColor from '../utils/image-color-extractor'
 
 const useStyles = makeStyles((theme) => ({
   container: {
     alignSelf: 'center',
     minHeight: '100vh',
     justifyContent: 'center',
-    padding: '5%'
+    padding: '5% 10%'
   },
   pokemonImage: {
-    width: '70%',
-    maxHeight: '70vh',
-    minWidth: 300
+    width: '75%',
+    maxHeight: '65vh',
+    minWidth: 300,
+    padding: '50px 0'
+  },
+  pokemonId: {
+    fontFamily: '"Poppins", sans-serif',
+    fontWeight: 500,
+    fontSize: 18,
+    opacity: .5
   },
   pokemonName: {
     fontFamily: '"Playfair Display", sans-serif',
@@ -75,7 +83,7 @@ export default function PokemonDetail() {
     >
 
       {/* Pokemon image */}
-      <Grid item xs={12} md={6} style={{ alignSelf: 'center' }}>
+      <Grid item xs={12} md={7} style={{ alignSelf: 'center' }}>
         <Box display='flex' justifyContent='center'>
           <img
             ref={pokemonImageRef}
@@ -89,9 +97,15 @@ export default function PokemonDetail() {
       </Grid>
 
       {/* Main pokemon info */}
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <Box className={classes.mainInfo}>
+
+          <div className={classes.pokemonId}>
+            #{pokemon.id.toString().padStart(3, '0')}
+          </div>
           <div className={classes.pokemonName}>{pokemon._name}</div>
+
+          {/* Pokemon type chips */}
           <div className={classes.pokemonTypes}>
             {pokemon.types.map(({ type, slot }) => (
               <PokemonTypeIcon
@@ -102,6 +116,15 @@ export default function PokemonDetail() {
               />
             ))}
           </div>
+
+          {/* Pokemon stats */}
+          <div>
+            <PokemonStatList
+              pokemonStats={pokemon.stats}
+              color={colors.contrastText}
+            />
+          </div>
+
         </Box>
       </Grid>
 

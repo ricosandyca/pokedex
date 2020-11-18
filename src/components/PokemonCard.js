@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
@@ -88,7 +88,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function PokemonCard({ pokemon }) {
-  const history = useHistory()
   const [imageLoaded, setImageLoaded] = useState(false)
   const [colors, setColors] = useState({})
   const pokemonImageRef = useRef(null)
@@ -102,52 +101,53 @@ export default function PokemonCard({ pokemon }) {
   }, [pokemonImageRef, imageLoaded])
 
   return (
-    <Paper
-      onClick={() => history.push(`/pokemon/${pokemon.id}`)}
-      classes={{ root: classes.paper }}
-      elevation={0}
-      style={{
-        color: colors.contrastText,
-        background: `linear-gradient(135deg, ${colors.dominant}, ${colors.dominantLighten})`
-      }}
-    >
-      {/* Pokemon images */}
-      <div className={classes.pokeballWrapper}>
+    <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: 'none' }}>
+      <Paper
+        classes={{ root: classes.paper }}
+        elevation={0}
+        style={{
+          color: colors.contrastText,
+          background: `linear-gradient(135deg, ${colors.dominant}, ${colors.dominantLighten})`
+        }}
+      >
+        {/* Pokemon images */}
+        <div className={classes.pokeballWrapper}>
+          <img
+            src={pokeball}
+            alt={pokemon.name}
+            className={classes.pokeball}
+            style={{
+              filter: `brightness(0) invert(${colors.isLight ? 0 : 1})`
+            }}
+          />
+        </div>
         <img
-          src={pokeball}
-          alt={pokemon.name}
-          className={classes.pokeball}
-          style={{
-            filter: `brightness(0) invert(${colors.isLight ? 0 : 1})`
-          }}
+          ref={pokemonImageRef}
+          src={pokemon._image}
+          alt={pokemon._name}
+          className={classes.pokemonImage}
+          onLoad={() => setImageLoaded(true)}
+          crossOrigin='anonymous'
         />
-      </div>
-      <img
-        ref={pokemonImageRef}
-        src={pokemon._image}
-        alt={pokemon._name}
-        className={classes.pokemonImage}
-        onLoad={() => setImageLoaded(true)}
-        crossOrigin='anonymous'
-      />
 
-      {/* Pokemon info */}
-      <div className={classes.pokemonInfo}>
-        <div className={classes.pokemonName}>
-          {pokemon._name}
+        {/* Pokemon info */}
+        <div className={classes.pokemonInfo}>
+          <div className={classes.pokemonName}>
+            {pokemon._name}
+          </div>
+          <div>
+            {pokemon.types.map(({ slot, type }) => (
+              <PokemonTypeChip
+                key={slot}
+                type={type.name}
+                color={colors.contrastText}
+                background={colors.dominantLighten}
+              />
+            ))}
+          </div>
         </div>
-        <div>
-          {pokemon.types.map(({ slot, type }) => (
-            <PokemonTypeChip
-              key={slot}
-              type={type.name}
-              color={colors.contrastText}
-              background={colors.dominantLighten}
-            />
-          ))}
-        </div>
-      </div>
 
-    </Paper>
+      </Paper>
+    </Link>
   )
 }
