@@ -38,5 +38,8 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
 export const pokemonQuery = async (pokemonId) => {
   // retrive pokemon detail by id
   const { data: pokemon } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
-  return pokemon
+  return {
+    ...pokemon,
+    _image: `${apiConfig.imageUrl}/images/pokemon/${pokemon.id}.png`
+  }
 }
