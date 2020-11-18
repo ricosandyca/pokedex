@@ -1,6 +1,9 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import blue from '@material-ui/core/colors/blue'
 
+/**
+ * Init Material UI theme library
+ */
 export default function initTheme() {
   const generateTextColor = (opacity = 1) => `rgba(80,80,80,${opacity})`
 

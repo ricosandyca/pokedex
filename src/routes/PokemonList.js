@@ -20,19 +20,17 @@ const useStyles = makeStyles({
 export default function PokemonList() {
   const classes = useStyles()
   const [pokemonValue, setPokemonValue] = useRecoilState(pokemonState())
+  const { results: pokemons, count } = pokemonValue
 
   const fetchNextPokemonList = () => {
-    const { limit, page, pokemons } = pokemonValue
-    pokemonListQuery(limit, page * pokemons.length)
-      .then(({ pokemons: newPokemons, count }) => setPokemonValue(curr => ({
+    const { next } = pokemonValue
+    pokemonListQuery(next)
+      .then(newPokemonList => setPokemonValue(curr => ({
         ...curr,
-        page: curr.page + 1,
-        count,
-        pokemons: [...curr.pokemons, ...newPokemons]
+        ...newPokemonList,
+        results: [...curr.results, ...newPokemonList.results]
       })))
   }
-
-  const { pokemons, count } = pokemonValue
 
   return (
     <InfiniteScroll

@@ -1,14 +1,19 @@
 import axios from 'axios'
 import apiConfig from '../../config/api'
 
-export const pokemonListQuery = async (limit, offset = 0) => {
+/**
+ * Retrive pokemon list
+ * 
+ * @param {String} next - Next pagination url
+ * @returns {Object} Pokemon list
+ */
+export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limit=12`) => {
   // retrive pokemon list from API
-  const { data: { results, count } } = await axios
-    .get(`${apiConfig.coreUrl}/pokemon?limit=${limit}&offset=${offset}`)
+  const { data } = await axios.get(next)
   
   // retrive details of each pokemon list
   let pokemons = []
-  for (const pokemon of results) {
+  for (const pokemon of data.results) {
     // get pokemon detail
     const { data } = await axios.get(pokemon.url)
     // push _image attribute to pokemon detail
@@ -18,9 +23,18 @@ export const pokemonListQuery = async (limit, offset = 0) => {
     })
   }
 
-  return { count, pokemons }
+  return {
+    ...data,
+    results: pokemons
+  }
 }
 
+/**
+ * Retrive pokemon detail by specific id
+ * 
+ * @param {String} pokemonId - Pokemon id to retrive
+ * @returns {Object} Pokemon detail
+ */
 export const pokemonQuery = async (pokemonId) => {
   // retrive pokemon detail by id
   const { data: pokemon } = await axios.get(`${apiConfig.coreUrl}/pokemon?${pokemonId}`)
