@@ -7,6 +7,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import PokemonTypeIcon from '../components/PokemonTypeIcon'
 import PokemonStatList from '../components/PokemonStatList'
+import Exception from './Exception'
 import { selectPokemonById } from '../store/selectors/pokemon'
 import extractImageColor from '../utils/image-color-extractor'
 
@@ -71,6 +72,9 @@ export default function PokemonDetail() {
         setColors(extractImageColor(pokemonImageRef.current))
     } catch { }
   }, [pokemonImageRef, imageLoaded])
+
+  // pokemon is not found
+  if (!pokemon) return <Exception message='Pokemon Not Found' />
 
   return (
     <Grid
