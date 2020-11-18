@@ -77,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: 25
   },
+  pokemonId: {
+    fontFamily: '"Poppins", sans-serif',
+    fontWeight: 500,
+    fontSize: 14,
+    opacity: .5
+  },
   pokemonInfo: {
     padding: '20px',
     width: '60%',
@@ -132,6 +138,9 @@ export default function PokemonCard({ pokemon }) {
 
         {/* Pokemon info */}
         <div className={classes.pokemonInfo}>
+          <div className={classes.pokemonId}>
+            #{pokemon.id.toString().padStart(3, '0')}
+          </div>
           <div className={classes.pokemonName}>
             {pokemon._name}
           </div>
