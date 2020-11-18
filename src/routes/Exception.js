@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     position: 'absolute',
     width: '100%',
-    left: 0,
     overflowX: 'hidden'
   },
   verticalDivider: {
@@ -30,15 +29,9 @@ export default function NotFound({ code = 404, message = 'Page Not Found' }) {
         wrap='nowrap'
         style={{ height: '100%' }}
       >
-        <Grid item>
-          <Typography variant='h6'>{code}</Typography>
-        </Grid>
-        <Grid item>
-          <div className={classes.verticalDivider} />
-        </Grid>
-        <Grid item>
-          <Typography variant='body2'>{message}</Typography>
-        </Grid>
+        <Grid item><Typography variant='h6'>{code}</Typography></Grid>
+        <Grid item><div className={classes.verticalDivider} /></Grid>
+        <Grid item><Typography variant='body2'>{message}</Typography></Grid>
       </Grid>
     </div>
   )

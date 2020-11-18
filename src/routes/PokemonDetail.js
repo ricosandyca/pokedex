@@ -1,21 +1,19 @@
-import { useState, useRef, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+import { selectPokemonById } from '../store/selectors/pokemon'
+import useImageColor from '../hooks/useImageColor'
 import PokemonTypeIcon from '../components/PokemonTypeIcon'
 import PokemonStatList from '../components/PokemonStatList'
 import Exception from './Exception'
-import { selectPokemonById } from '../store/selectors/pokemon'
-import extractImageColor from '../utils/image-color-extractor'
+import getPokemonTag from '../utils/pokemon-tag'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    alignSelf: 'center',
     minHeight: '100vh',
-    justifyContent: 'center',
     padding: '5% 10%'
   },
   pokemonImage: {
@@ -62,16 +60,7 @@ export default function PokemonDetail() {
   const classes = useStyles()
   const { pokemonId } = useParams()
   const pokemon = useRecoilValue(selectPokemonById(pokemonId))
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const [colors, setColors] = useState({})
-  const pokemonImageRef = useRef(null)
-
-  useEffect(() => {
-    try {
-      if (pokemonImageRef && imageLoaded)
-        setColors(extractImageColor(pokemonImageRef.current))
-    } catch { }
-  }, [pokemonImageRef, imageLoaded])
+  const { colors, ImageComponent } = useImageColor(pokemon._image)
 
   // pokemon is not found
   if (!pokemon) return <Exception message='Pokemon Not Found' />
@@ -89,14 +78,7 @@ export default function PokemonDetail() {
       {/* Pokemon image */}
       <Grid item xs={12} md={7} style={{ alignSelf: 'center' }}>
         <Box display='flex' justifyContent='center'>
-          <img
-            ref={pokemonImageRef}
-            src={pokemon._image}
-            alt={pokemon._name}
-            className={classes.pokemonImage}
-            onLoad={() => setImageLoaded(true)}
-            crossOrigin='anonymous'
-          />
+          <ImageComponent className={classes.pokemonImage} />
         </Box>
       </Grid>
 
@@ -104,9 +86,8 @@ export default function PokemonDetail() {
       <Grid item xs={12} md={5}>
         <Box className={classes.mainInfo}>
 
-          <div className={classes.pokemonId}>
-            #{pokemon.id.toString().padStart(3, '0')}
-          </div>
+          {/* Pokemon name and tag */}
+          <div className={classes.pokemonId}>{getPokemonTag(pokemon.id)}</div>
           <div className={classes.pokemonName}>{pokemon._name}</div>
 
           {/* Pokemon type chips */}

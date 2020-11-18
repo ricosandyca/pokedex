@@ -7,6 +7,7 @@ export const selectPokemonById = selectorFamily({
   key: 'selectPokemonById',
   get: pokemonId => async ({ get }) => {
     let pokemon
+    
     // try to retrive pokemon detail from current state
     const { results: pokemons } = get(pokemonState())
     pokemon = pokemons.find(({ id, name }) => (

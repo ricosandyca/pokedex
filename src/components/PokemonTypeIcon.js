@@ -27,11 +27,7 @@ export default function PokemonTypeIcon({ type, background, color }) {
 
   return (
     <div className={classes.root} style={{ background, color }}>
-      <img
-        alt={type}
-        src={`/assets/pokemon/types/${type}.png`}
-        className={classes.typeIcon}
-      />
+      <img alt={type} src={`/assets/pokemon/types/${type}.png`} className={classes.typeIcon} />
       <div className={classes.typeName}>{type}</div>
     </div>
   )

@@ -12,7 +12,6 @@ const useStyles = makeStyles({
     overflow: 'hidden !important'
   },
   container: {
-    alignSelf: 'center',
     padding: '100px 5%'
   }
 })
@@ -20,10 +19,14 @@ const useStyles = makeStyles({
 export default function PokemonList() {
   const classes = useStyles()
   const [pokemonValue, setPokemonValue] = useRecoilState(pokemonState('init'))
-  const { results: pokemons, count } = pokemonValue
 
+  const { results: pokemons, count, next } = pokemonValue
+  
+  /**
+   * Fetch next pokemon list
+   * By pushing new retrived list
+   */
   const fetchNextPokemonList = () => {
-    const { next } = pokemonValue
     pokemonListQuery(next)
       .then(newPokemonList => setPokemonValue(curr => ({
         ...curr,
@@ -39,6 +42,8 @@ export default function PokemonList() {
       hasMore={pokemons.length < count}
       className={classes.scroller}
     >
+
+      {/* Pokemon grid list */}
       <Grid container spacing={5} justify='center' className={classes.container}>
         {pokemons.map(pokemon => (
           <Grid item key={pokemon.id}>
@@ -46,6 +51,7 @@ export default function PokemonList() {
           </Grid>
         ))}
       </Grid>
+
     </InfiniteScroll>
   )
 }

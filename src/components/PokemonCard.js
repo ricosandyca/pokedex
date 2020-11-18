@@ -1,14 +1,16 @@
-import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+import useImageColor from '../hooks/useImageColor'
 import PokemonTypeChip from './PokemonTypeChip'
-
-import extractImageColor from '../utils/image-color-extractor'
+import getPokemonTag from '../utils/pokemon-tag'
 import pokeball from '../assets/images/pokeball.png'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
+  link: {
+    textDecoration: 'none'
+  },
   paper: {
     display: 'flex',
     alignItems: 'center',
@@ -91,23 +93,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     textTransform: 'capitalize'
   }
-}))
+})
 
 export default function PokemonCard({ pokemon }) {
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const [colors, setColors] = useState({})
-  const pokemonImageRef = useRef(null)
   const classes = useStyles()
-
-  useEffect(() => {
-    try {
-      if (pokemonImageRef && imageLoaded)
-        setColors(extractImageColor(pokemonImageRef.current))
-    } catch { }
-  }, [pokemonImageRef, imageLoaded])
+  const { colors, ImageComponent } = useImageColor(pokemon._image)
 
   return (
-    <Link to={`/pokemon/${pokemon.name}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/pokemon/${pokemon.name}`} className={classes.link}>
       <Paper
         classes={{ root: classes.paper }}
         elevation={0}
@@ -116,6 +109,7 @@ export default function PokemonCard({ pokemon }) {
           background: `linear-gradient(135deg, ${colors.dominant}, ${colors.dominantLighten})`
         }}
       >
+
         {/* Pokemon images */}
         <div className={classes.pokeballWrapper}>
           <img
@@ -127,23 +121,12 @@ export default function PokemonCard({ pokemon }) {
             }}
           />
         </div>
-        <img
-          ref={pokemonImageRef}
-          src={pokemon._image}
-          alt={pokemon._name}
-          className={classes.pokemonImage}
-          onLoad={() => setImageLoaded(true)}
-          crossOrigin='anonymous'
-        />
+        <ImageComponent className={classes.pokemonImage} />
 
         {/* Pokemon info */}
         <div className={classes.pokemonInfo}>
-          <div className={classes.pokemonId}>
-            #{pokemon.id.toString().padStart(3, '0')}
-          </div>
-          <div className={classes.pokemonName}>
-            {pokemon._name}
-          </div>
+          <div className={classes.pokemonId}>{getPokemonTag(pokemon.id)}</div>
+          <div className={classes.pokemonName}>{pokemon._name}</div>
           <div>
             {pokemon.types.map(({ slot, type }) => (
               <PokemonTypeChip

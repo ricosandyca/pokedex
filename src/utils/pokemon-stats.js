@@ -1,26 +1,26 @@
 export const statInfo = {
   hp: {
-    max: 300, // 255
+    max: 300, // @max - 255
     displayName: 'HP'
   },
   attack: {
-    max: 200, // 180
+    max: 200, // @max - 180
     displayName: 'Attack'
   },
   defense: {
-    max: 250, // 230
+    max: 250, // @max - 230
     displayName: 'Attack'
   },
   'special-attack': {
-    max: 200, // 180
+    max: 200, // @max - 180
     displayName: 'Special Attack'
   },
   'special-defense': {
-    max: 250, // 230
+    max: 250, // @max - 230
     displayName: 'Special Attack'
   },
   speed: {
-    max: 200, //180
+    max: 200, // @max - 180
     displayName: 'Speed'
   }
 }
