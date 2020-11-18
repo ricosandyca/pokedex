@@ -15,7 +15,7 @@ export const selectPokemonById = selectorFamily({
     if (pokemon) return pokemon
 
     // retrive pokemon from API
-    pokemon = await pokemonQuery()
+    pokemon = await pokemonQuery(pokemonId)
     return pokemon
   }
 })

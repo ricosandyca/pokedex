@@ -6,6 +6,7 @@ import { selectPokemonById } from '../store/selectors/pokemon'
 export default function PokemonDetail() {
   const { pokemonId } = useParams()
   const pokemon = useRecoilValue(selectPokemonById(pokemonId))
+  console.log(pokemon)
 
   return (
     <div>
