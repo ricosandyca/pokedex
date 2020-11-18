@@ -8,8 +8,9 @@ export const selectPokemonById = selectorFamily({
   get: pokemonId => async ({ get }) => {
     let pokemon
     // try to retrive pokemon detail from current state
-    const { pokemons } = get(pokemonState)
+    const { results: pokemons } = get(pokemonState())
     pokemon = pokemons.find(({ id }) => id === pokemonId)
+
     // if pokemon detail found
     if (pokemon) return pokemon
 

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 export default function PokemonList() {
   const classes = useStyles()
-  const [pokemonValue, setPokemonValue] = useRecoilState(pokemonState())
+  const [pokemonValue, setPokemonValue] = useRecoilState(pokemonState('init'))
   const { results: pokemons, count } = pokemonValue
 
   const fetchNextPokemonList = () => {

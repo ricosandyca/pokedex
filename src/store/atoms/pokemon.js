@@ -3,8 +3,9 @@ import { pokemonListQuery } from '../actions/pokemon'
 
 export const pokemonState = atomFamily({
   key: 'pokemonState',
-  default: async () => {
+  default: async (state) => {
     // retrive default pokemon list data
-    return await pokemonListQuery()
+    if (state === 'init') return await pokemonListQuery()
+    return { results: [] }
   }
 })
