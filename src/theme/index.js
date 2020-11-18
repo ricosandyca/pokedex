@@ -10,7 +10,7 @@ export default function initTheme() {
   return createMuiTheme({
     palette: {
       background: {
-        default: '#ECF3FE',
+        default: '#FDFDFD',
         paper: '#FFFFFF'
       },
       text: {
