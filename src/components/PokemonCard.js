@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-import AbilityChip from './AbilityChip'
+import PokemonTypeChip from './PokemonTypeChip'
 
 import extractImageColor from '../utils/image-color-extractor'
 import pokeball from '../assets/images/pokeball.png'
@@ -134,10 +134,10 @@ export default function PokemonCard({ pokemon }) {
           {pokemon.name}
         </div>
         <div>
-          {pokemon.abilities.map(({ ability }, index) => (
-            <AbilityChip
-              key={index}
-              ability={ability.name}
+          {pokemon.types.map(({ slot, type }) => (
+            <PokemonTypeChip
+              key={slot}
+              type={type.name}
               color={colors.contrastText}
               background={colors.dominantLighten}
             />
