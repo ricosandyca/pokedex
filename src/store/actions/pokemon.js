@@ -46,3 +46,13 @@ export const pokemonQuery = async (pokemonId) => {
       || data.sprites.other['official-artwork'].front_default
   }
 }
+
+/**
+ * 
+ * @param {String} pokemonId - Id of pokemon to retrive
+ * @returns {Object} Pokemon species data
+ */
+export const pokemonSpeciesQuery = async (pokemonId) => {
+  // retrive pokemon species data
+  return await axios.get(`${apiConfig.coreUrl}/pokemon-species/${pokemonId}`)
+}
