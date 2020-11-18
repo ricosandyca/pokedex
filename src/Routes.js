@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 
 import PokemonListRoute from './routes/PokemonList'
+import PokemonDetailRoute from './routes/PokemonDetail'
 import NotFoundRoute from './routes/NotFound'
 
 export default function Routes() {
@@ -12,6 +13,7 @@ export default function Routes() {
     <Router>
       <Switch>
         <Route path='/' component={PokemonListRoute} exact />
+        <Route path='/pokemon/:pokemonId' component={PokemonDetailRoute} exact />
         <Route component={NotFoundRoute} />
       </Switch>
     </Router>
