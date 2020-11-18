@@ -56,17 +56,3 @@ export const pokemonQuery = async (pokemonId) => {
     return undefined
   }
 }
-
-/**
- * 
- * @param {String} pokemonId - Id of pokemon to retrive
- * @returns {Object} Pokemon species data
- */
-export const pokemonSpeciesQuery = async (pokemonId) => {
-  try {
-    // retrive pokemon species data
-    return await axios.get(`${apiConfig.coreUrl}/pokemon-species/${pokemonId}`)
-  } catch {
-    return undefined
-  }
-}
