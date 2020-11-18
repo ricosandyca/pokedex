@@ -8,25 +8,31 @@ import apiConfig from '../../config/api'
  * @returns {Object} Pokemon list
  */
 export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limit=12`) => {
-  // retrive pokemon list from API
-  const { data } = await axios.get(next)
+  try {
+    // retrive pokemon list from API
+    const { data } = await axios.get(next)
 
-  // retrive details of each pokemon list
-  let pokemons = []
-  for (const pokemon of data.results) {
-    // get pokemon detail
-    const { data } = await axios.get(pokemon.url)
-    pokemons.push({
+    // retrive details of each pokemon list
+    let pokemons = []
+    for (const pokemon of data.results) {
+      // get pokemon detail
+      const { data } = await axios.get(pokemon.url)
+      pokemons.push({
+        ...data,
+        _name: data.name.replace(/[-]/g, ' '),
+        _image: data.sprites.other['dream_world'].front_default
+          || data.sprites.other['official-artwork'].front_default
+      })
+    }
+
+    return {
       ...data,
-      _name: data.name.replace(/[-]/g, ' '),
-      _image: data.sprites.other['dream_world'].front_default
-        || data.sprites.other['official-artwork'].front_default
-    })
-  }
-
-  return {
-    ...data,
-    results: pokemons
+      results: pokemons
+    }
+  } catch {
+    return {
+      results: []
+    }
   }
 }
 
@@ -37,13 +43,17 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
  * @returns {Object} Pokemon detail
  */
 export const pokemonQuery = async (pokemonId) => {
-  // retrive pokemon detail by id
-  const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
-  return {
-    ...data,
-    _name: data.name.replace(/[-]/g, ' '),
-    _image: data.sprites.other['dream_world'].front_default
-      || data.sprites.other['official-artwork'].front_default
+  try {
+    // retrive pokemon detail by id
+    const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
+    return {
+      ...data,
+      _name: data.name.replace(/[-]/g, ' '),
+      _image: data.sprites.other['dream_world'].front_default
+        || data.sprites.other['official-artwork'].front_default
+    }
+  } catch {
+    return undefined
   }
 }
 
@@ -53,6 +63,10 @@ export const pokemonQuery = async (pokemonId) => {
  * @returns {Object} Pokemon species data
  */
 export const pokemonSpeciesQuery = async (pokemonId) => {
-  // retrive pokemon species data
-  return await axios.get(`${apiConfig.coreUrl}/pokemon-species/${pokemonId}`)
+  try {
+    // retrive pokemon species data
+    return await axios.get(`${apiConfig.coreUrl}/pokemon-species/${pokemonId}`)
+  } catch {
+    return undefined
+  }
 }
