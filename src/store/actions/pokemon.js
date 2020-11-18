@@ -16,7 +16,10 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
   for (const pokemon of data.results) {
     // get pokemon detail
     const { data } = await axios.get(pokemon.url)
-    pokemons.push(data)
+    pokemons.push({
+      ...data,
+      _name: data.name.replace(/[-]/g, ' ')
+    })
   }
 
   return {
@@ -33,6 +36,9 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
  */
 export const pokemonQuery = async (pokemonId) => {
   // retrive pokemon detail by id
-  const { data: pokemon } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
-  return pokemon
+  const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
+  return {
+    ...data,
+    _name: data.name.replace(/[-]/g, ' ')
+  }
 }

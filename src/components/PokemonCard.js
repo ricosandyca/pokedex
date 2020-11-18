@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     top: '-25%'
   },
   pokemonName: {
-    fontFamily: '"Poppins", sans-serif',
+    fontFamily: '"Playfair Display", sans-serif',
     fontWeight: 500,
     fontSize: 25
   },
@@ -131,7 +131,7 @@ export default function PokemonCard({ pokemon }) {
       {/* Pokemon info */}
       <div className={classes.pokemonInfo}>
         <div className={classes.pokemonName}>
-          {pokemon.name}
+          {pokemon._name}
         </div>
         <div>
           {pokemon.types.map(({ slot, type }) => (
