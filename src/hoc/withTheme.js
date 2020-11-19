@@ -27,13 +27,13 @@ function Body(props) {
  * @returns {Node} Themed react component
  */
 export default function withTheme(Content) {
-  return function () {
+  return function (props) {
     const theme = initTheme()
 
     return (
       <ThemeProvider theme={theme}>
         <Body>
-          <Content />
+          <Content {...props} />
         </Body>
       </ThemeProvider>
     )

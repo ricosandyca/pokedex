@@ -11,11 +11,11 @@ export default function withAnimation(Content, ...animations) {
   const animation = (animations || []).reduce((acc, curr) => (
     acc + `animate__${curr} `
   ), '')
-  
-  return function () {
+
+  return function (props) {
     return (
       <div className={`animate__animated ${animation}`}>
-        <Content />
+        <Content {...props} />
       </div>
     )
   }
