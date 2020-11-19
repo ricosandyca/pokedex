@@ -14,16 +14,16 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
     const { data } = await axios.get(next)
 
     // retrive details of each pokemon list
-    let pokemons = []
-    for (const pokemon of data.results) {
-      // get pokemon detail
-      const { data } = await axios.get(pokemon.url)
-      pokemons.push(mapPokemonData(data))
+    const pokemonIds = data.results.map(pokemon => pokemon.name)
+    const promises = []
+    for (const pokemonId of pokemonIds) {
+      promises.push(pokemonQuery(pokemonId))
     }
+    const pokemons = await Promise.all(promises)
 
     return {
       ...data,
-      results: pokemons
+      results: pokemons.map(pokemon => mapPokemonData(pokemon))
     }
   } catch {
     return {
