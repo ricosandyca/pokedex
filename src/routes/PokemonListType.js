@@ -14,6 +14,7 @@ import withAnimation from '../hoc/withAnimation'
 import useImageColor from '../hooks/useImageColor'
 import { filterPokemonState } from '../store/atoms/pokemon'
 import { pokemonQueryByIds } from '../store/actions/pokemon'
+import appConfig from '../config/app'
 
 const useStyles = makeStyles((theme) => ({
   scroller: {
@@ -83,6 +84,8 @@ function PokemonListType() {
   }
 
   if (pokemon.metadata.length <= 0) return <Exception message='Pokemon Type Not Found' />
+
+  document.title = `${typeId} | ${appConfig.name}`
 
   return (
     <Grid container className={classes.container}>
