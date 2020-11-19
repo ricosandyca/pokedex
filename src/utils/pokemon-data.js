@@ -13,6 +13,6 @@ export function mapPokemonData(pokemon) {
     _name: capitalize(pokemon.name),
     _image: pokemon.sprites.other['dream_world'].front_default
       || pokemon.sprites.other['official-artwork'].front_default
-      || '/assets/pokemon/pokemon-default.png'
+      || '/assets/pokemon/pokemon-default.svg'
   }
 }

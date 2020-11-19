@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   pokemonImage: {
     width: '75%',
     maxHeight: '450px',
-    width: 'auto',
     padding: '50px 0'
   },
   pokemonId: {
