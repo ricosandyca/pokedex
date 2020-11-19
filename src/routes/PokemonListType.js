@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0
   },
   typeLogo: {
-    width: 50,
+    width: 64,
     padding: '10px',
     borderRadius: '100%'
   },
@@ -40,19 +40,16 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: '"Playfair Display", sans-serif',
     textTransform: 'capitalize',
     fontWeight: 500,
-    margin: `${theme.spacing(1)}px 0`
-  },
-  typeTextInfo: {
-    fontFamily: '"Poppins", sans-serif',
-    ontWeight: 300,
-    padding: `${theme.spacing(.5)}px ${theme.spacing(1.5)}px`,
-    borderRadius: '100px'
+    margin: `${theme.spacing(2)}px 0`
   },
   title: {
     fontFamily: '"Playfair Display", sans-serif',
     fontWeight: 700,
-    paddingBottom: '10px',
+    paddingBottom: '5px',
     textTransform: 'capitalize',
+  },
+  subtitle: {
+    fontFamily: '"Poppins", sans-serif'
   }
 }))
 
@@ -123,16 +120,6 @@ function PokemonListType() {
             >
               {typeId}
             </Typography>
-            <Typography
-              variant='subtitle2'
-              className={classes.typeTextInfo}
-              style={{
-                color: colors.contrastText,
-                background: colors.dominantLighten
-              }}
-            >
-              {pokemon.metadata.length} Pokemons
-            </Typography>
           </Box>
 
         </Grid>
@@ -150,6 +137,9 @@ function PokemonListType() {
           {/* Pokemon grid list header */}
           <Box className={classes.header}>
             <Typography variant='h3' className={classes.title}>{typeId}</Typography>
+            <Typography variant='subtitle1' className={classes.subtitle}>
+              {pokemon.metadata.length} Pokemons Found
+            </Typography>
           </Box>
 
           {/* Pokemon grid list */}

@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
     zIndex: 2,
     position: 'absolute',
-    right: '-2.5%',
+    right: '-.5%',
     top: '-25%'
   },
   pokemonName: {
