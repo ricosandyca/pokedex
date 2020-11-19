@@ -1,5 +1,6 @@
 const app = {
-  name: 'Pokédex'
+  name: 'Pokédex',
+  slogan: 'Gotta Catch \'Em All'
 }
 
 export default app
