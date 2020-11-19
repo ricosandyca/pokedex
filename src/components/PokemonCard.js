@@ -7,14 +7,13 @@ import PokemonTypeChip from './PokemonTypeChip'
 import getPokemonTag from '../utils/pokemon-tag'
 import pokeball from '../assets/images/pokeball.png'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none'
   },
   paper: {
     display: 'flex',
     alignItems: 'center',
-    cursor: 'pointer',
     top: 0,
     margin: '5px 0',
     width: 350,
@@ -92,8 +91,14 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     flexWrap: 'wrap',
     textTransform: 'capitalize'
+  },
+  pokemonTypes: {
+    padding: '5px 0',
+    '& > *': {
+      marginRight: theme.spacing(.5),
+    }
   }
-})
+}))
 
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
@@ -127,7 +132,7 @@ export default function PokemonCard({ pokemon }) {
         <div className={classes.pokemonInfo}>
           <div className={classes.pokemonId}>{getPokemonTag(pokemon.id)}</div>
           <div className={classes.pokemonName}>{pokemon._name}</div>
-          <div>
+          <div className={classes.pokemonTypes}>
             {pokemon.types.map(({ slot, type }) => (
               <PokemonTypeChip
                 key={slot}

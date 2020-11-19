@@ -6,7 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { selectPokemonById } from '../store/selectors/pokemon'
 import useImageColor from '../hooks/useImageColor'
-import PokemonTypeIcon from '../components/PokemonTypeIcon'
+import PokemonTypeChip from '../components/PokemonTypeChip'
 import PokemonStatList from '../components/PokemonStatList'
 import Exception from './Exception'
 import getPokemonTag from '../utils/pokemon-tag'
@@ -47,7 +47,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   pokemonTypes: {
-    padding: '10px 0'
+    '& > *': {
+      margin: theme.spacing(1),
+      marginLeft: 0
+    }
   },
   mainInfo: {
     [theme.breakpoints.down('sm')]: {
@@ -93,9 +96,11 @@ export default function PokemonDetail() {
           {/* Pokemon type chips */}
           <div className={classes.pokemonTypes}>
             {pokemon.types.map(({ type, slot }) => (
-              <PokemonTypeIcon
+              <PokemonTypeChip
                 key={slot}
                 type={type.name}
+                size='large'
+                withIcon={true}
                 background={colors.dominantLighten}
                 color={colors.contrastText}
               />
