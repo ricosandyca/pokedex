@@ -7,7 +7,6 @@ const useStyles = makeStyles({
     padding: 5,
     background: 'white',
     borderRadius: '100px',
-    marginBottom: '10px',
     display: 'inline-flex',
     alignItems: 'center'
   }),

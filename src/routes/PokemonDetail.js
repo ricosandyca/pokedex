@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 40,
     textTransform: 'capitalize',
     position: 'relative',
-    marginBottom: '10px',
+    marginBottom: theme.spacing(2),
     '&::before': {
       content: '""',
       transition: '.3s',

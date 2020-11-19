@@ -1,8 +1,8 @@
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '15px 0'
+    margin: `${theme.spacing(1.5)}px 0`
   },
   statText: {
     textAlign: 'left',
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     height: '100%',
     background: 'currentColor'
   }
-})
+}))
 
 export default function PokemonStat({ stat, color }) {
   const classes = useStyles()
