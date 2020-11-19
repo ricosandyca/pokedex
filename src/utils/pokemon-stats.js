@@ -9,7 +9,7 @@ export const statInfo = {
   },
   defense: {
     max: 250, // @max - 230
-    displayName: 'Attack'
+    displayName: 'Defense'
   },
   'special-attack': {
     max: 200, // @max - 180
