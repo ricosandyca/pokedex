@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pokemonImage: {
     width: '75%',
-    maxHeight: '65vh',
+    maxHeight: '450px',
     minWidth: 300,
     padding: '50px 0'
   },
@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   mainInfo: {
+    minHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center'
     }
