@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   pokeballWrapper: {
+    borderRadius: '10px',
     position: 'absolute',
     overflow: 'hidden',
     width: '100%',
