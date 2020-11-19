@@ -16,7 +16,7 @@ export default function Routes() {
       <Switch>
         <Route path='/' children={<Redirect to='/pokemon' />} exact />
         <Route path='/pokemon' component={PokemonListRoute} exact />
-        <Route path='/pokemon/type/:pokemonId' component={PokemonListTypeRoute} exact />
+        <Route path='/pokemon/type/:typeId' component={PokemonListTypeRoute} exact />
         <Route path='/pokemon/:pokemonId' component={PokemonDetailRoute} exact />
         <Route component={ExceptionRoute} />
       </Switch>
