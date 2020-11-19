@@ -3,6 +3,7 @@ import { generateQueryStringParameters } from '../utils/router'
 
 /**
  * Override component to have router link
+ * Used for complex compent inside router link
  * 
  * @param {Node} Content
  * @return {Node}
