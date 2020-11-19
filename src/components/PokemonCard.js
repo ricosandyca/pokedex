@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     '&::before': {
       content: '""',
       position: 'absolute',
+      margin: 'auto',
       left: 0,
       right: 0,
       zIndex: -1,
