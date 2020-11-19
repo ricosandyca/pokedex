@@ -5,8 +5,11 @@ import { generateQueryStringParameters } from '../utils/router'
  * Override component to have router link
  * Used for complex compent inside router link
  * 
+ * Sent props to content
+ * - link: boolean
+ * 
  * @param {Node} Content
- * @return {Node}
+ * @returns {Node} Component wrapped by link
  */
 export default function withLink(Content) {
   return function ({ path, query, ...props }) {
