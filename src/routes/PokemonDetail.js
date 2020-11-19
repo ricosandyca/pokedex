@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+import withAnimation from '../hoc/withAnimation'
 import { selectPokemonById } from '../store/selectors/pokemon'
 import useImageColor from '../hooks/useImageColor'
 import PokemonTypeChip from '../components/PokemonTypeChip'
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function PokemonDetail() {
+function PokemonDetail() {
   const classes = useStyles()
   const { pokemonId } = useParams()
   const pokemon = useRecoilValue(selectPokemonById(pokemonId))
@@ -124,3 +125,5 @@ export default function PokemonDetail() {
     </Grid>
   )
 }
+
+export default withAnimation(PokemonDetail, 'fadeIn')

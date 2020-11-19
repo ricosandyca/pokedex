@@ -1,6 +1,8 @@
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+
+import withAnimation from '../hoc/withAnimation'
 import appConfig from '../config/app'
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function NotFound({ code = 404, message = 'Page Not Found' }) {
+function Exception({ code = 404, message = 'Page Not Found' }) {
   const classes = useStyles()
   document.title = `${message} | ${appConfig.name}`
 
@@ -38,3 +40,5 @@ export default function NotFound({ code = 404, message = 'Page Not Found' }) {
     </div>
   )
 }
+
+export default withAnimation(Exception, 'fadeIn')

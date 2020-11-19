@@ -21,7 +21,7 @@ function Body(props) {
 
 /**
  * Theme component by wrapping the component
- * Custom styles is provided by material-ui library
+ * Custom styles are provided by material-ui library
  *
  * @param {Node} Content - React component to be themed
  * @returns {Node} Themed react component

@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import Grid from '@material-ui/core/Grid'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+import withAnimation from '../hoc/withAnimation'
 import { pokemonState } from '../store/atoms/pokemon'
 import { pokemonListQuery } from '../store/actions/pokemon'
 import PokemonCard from '../components/PokemonCard'
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function PokemonList() {
+function PokemonList() {
   const classes = useStyles()
   const [pokemonValue, setPokemonValue] = useRecoilState(pokemonState('init'))
 
@@ -58,3 +59,5 @@ export default function PokemonList() {
     </InfiniteScroll>
   )
 }
+
+export default withAnimation(PokemonList, 'fadeIn')
