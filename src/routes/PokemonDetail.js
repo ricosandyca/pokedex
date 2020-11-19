@@ -10,6 +10,7 @@ import PokemonTypeChip from '../components/PokemonTypeChip'
 import PokemonStatList from '../components/PokemonStatList'
 import Exception from './Exception'
 import getPokemonTag from '../utils/pokemon-tag'
+import appConfig from '../config/app'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,10 +64,12 @@ export default function PokemonDetail() {
   const classes = useStyles()
   const { pokemonId } = useParams()
   const pokemon = useRecoilValue(selectPokemonById(pokemonId))
-  const { colors, ImageComponent } = useImageColor(pokemon._image)
+  const { colors, ImageComponent } = useImageColor((pokemon || {})._image)
 
   // pokemon is not found
   if (!pokemon) return <Exception message='Pokemon Not Found' />
+
+  document.title = `${pokemon._name} | ${appConfig.name}`
 
   return (
     <Grid

@@ -6,6 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import { pokemonState } from '../store/atoms/pokemon'
 import { pokemonListQuery } from '../store/actions/pokemon'
 import PokemonCard from '../components/PokemonCard'
+import appConfig from '../config/app'
 
 const useStyles = makeStyles({
   scroller: {
@@ -34,6 +35,8 @@ export default function PokemonList() {
         results: [...curr.results, ...newPokemonList.results]
       })))
   }
+
+  document.title = appConfig.name
 
   return (
     <InfiniteScroll

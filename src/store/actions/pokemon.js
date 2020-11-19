@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { capitalize } from '../../utils/text'
 import apiConfig from '../../config/api'
 
 /**
@@ -19,7 +20,7 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
       const { data } = await axios.get(pokemon.url)
       pokemons.push({
         ...data,
-        _name: data.name.replace(/[-]/g, ' '),
+        _name: capitalize(data.name),
         _image: data.sprites.other['dream_world'].front_default
           || data.sprites.other['official-artwork'].front_default
       })
@@ -48,7 +49,7 @@ export const pokemonQuery = async (pokemonId) => {
     const { data } = await axios.get(`${apiConfig.coreUrl}/pokemon/${pokemonId}`)
     return {
       ...data,
-      _name: data.name.replace(/[-]/g, ' '),
+      _name: capitalize(data.name),
       _image: data.sprites.other['dream_world'].front_default
         || data.sprites.other['official-artwork'].front_default
     }

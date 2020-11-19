@@ -28,8 +28,6 @@ export default function PokemonTypeChip({
   withIcon = false
 }) {
 
-  console.log(size)
-
   let styles = { height: '18px', fontSize: '12px' }
   switch (size) {
 

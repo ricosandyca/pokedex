@@ -1,6 +1,7 @@
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import appConfig from '../config/app'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NotFound({ code = 404, message = 'Page Not Found' }) {
   const classes = useStyles()
+  document.title = `${message} | ${appConfig.name}`
 
   return (
     <div className={classes.root}>
