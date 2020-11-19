@@ -19,7 +19,7 @@ export default function withLink(Content) {
     const queryString = generateQueryStringParameters(query)
     const hasQueryString = queryString.trim() !== ''
     const fullPath = hasQueryString
-      ? `${path}?${queryString}`
+      ? `${path}${queryString}`
       : path
 
     if (!isActive) return (<Content {...props} />)
