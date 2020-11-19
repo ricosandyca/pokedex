@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 
 import PokemonListRoute from './routes/PokemonList'
@@ -12,7 +13,8 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path='/' component={PokemonListRoute} exact />
+        <Route path='/' children={<Redirect to='/pokemon' />} exact />
+        <Route path='/pokemon' component={PokemonListRoute} exact />
         <Route path='/pokemon/:pokemonId' component={PokemonDetailRoute} exact />
         <Route component={ExceptionRoute} />
       </Switch>
