@@ -1,6 +1,10 @@
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import withLink from '../hoc/withLink'
 
 const useStyles = makeStyles({
+  link: {
+    textDecoration: 'none'
+  },
   root: props => ({
     height: props.height,
     fontSize: props.fontSize,
@@ -8,7 +12,13 @@ const useStyles = makeStyles({
     background: 'white',
     borderRadius: '100px',
     display: 'inline-flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'relative',
+    transition: '.3s',
+    top: 0,
+    '&:hover': props.link && {
+      top: '-5px'
+    }
   }),
   typeIcon: {
     height: '100%'
@@ -20,32 +30,30 @@ const useStyles = makeStyles({
   }
 })
 
-export default function PokemonTypeChip({
+function PokemonTypeChip({
   type,
   background,
   color,
   size = 'small',
-  withIcon = false
+  withIcon = false,
+  link = false
 }) {
 
-  let styles = { height: '18px', fontSize: '12px' }
+  // styles by size
+  let styles = { height: '18px', fontSize: '12px', link }
   switch (size) {
-
     // medium size chip style
     case 'medium':
-      styles = { height: '24px', fontSize: '13px' }
+      styles = { height: '24px', fontSize: '13px', link }
       break
-
     // large size chip style
     case 'large':
-      styles = { height: '30px', fontSize: '14px' }
+      styles = { height: '30px', fontSize: '14px', link }
       break
-      
     // small size chip or default styles
     case 'small':
     default:
       break
-
   }
 
   const classes = useStyles(styles)
@@ -58,3 +66,5 @@ export default function PokemonTypeChip({
     </div>
   )
 }
+
+export default withLink(PokemonTypeChip)

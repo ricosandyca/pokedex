@@ -5,7 +5,7 @@
  *
  * @param {Node} Content - React component to be themed
  * @param {Array} animations - Keys of animation
- * @returns {Function}
+ * @returns {Node}
  */
 export default function withAnimation(Content, ...animations) {
   const animation = (animations || []).reduce((acc, curr) => (

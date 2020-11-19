@@ -107,6 +107,8 @@ function PokemonDetail() {
                 withIcon={true}
                 background={colors.dominantLighten}
                 color={colors.contrastText}
+                path='/pokemon'
+                query={{ type: type.name }}
               />
             ))}
           </div>
