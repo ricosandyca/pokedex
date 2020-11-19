@@ -6,7 +6,7 @@ import apiConfig from '../../config/api'
  * Retrive pokemon list
  * 
  * @param {String} next - Next pagination url
- * @returns {Object} Pokemon list
+ * @returns {Promise<Object>} Pokemon list
  */
 export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limit=12`) => {
   try {
@@ -36,7 +36,7 @@ export const pokemonListQuery = async (next = `${apiConfig.coreUrl}/pokemon?limi
  * Retrive pokemon detail by specific id
  * 
  * @param {String} pokemonId - Pokemon id to retrive
- * @returns {Object} Pokemon detail
+ * @returns {Promise<Object>} Pokemon detail
  */
 export const pokemonQuery = async (pokemonId) => {
   try {
@@ -49,10 +49,28 @@ export const pokemonQuery = async (pokemonId) => {
 }
 
 /**
+ * Retrive pokemon detail by multiple ids
+ * 
+ * @param {Array} pokemonIds - Pokemon ids to retrive
+ * @returns {Promise<Array>} pokemon details
+ */
+export const pokemonQueryByIds = async (pokemonIds) => {
+  try {
+    const promises = []
+    for (const pokemonId of pokemonIds) {
+      promises.push(pokemonQuery(pokemonId))
+    }
+    return await Promise.all(promises)
+  } catch {
+    return []
+  }
+}
+
+/**
  * Retrive pokemon type data
  * 
  * @param {String} typeId - Type id to retrive
- * @returns {Object} type data
+ * @returns {Promise<Object>} type data
  */
 export const pokemonTypeQuery = async (typeId) => {
   try {

@@ -1,5 +1,5 @@
 import { atomFamily } from 'recoil'
-import { pokemonListQuery, pokemonTypeQuery } from '../actions/pokemon'
+import { pokemonListQuery, pokemonTypeQuery, pokemonQueryByIds } from '../actions/pokemon'
 
 export const pokemonState = atomFamily({
   key: 'pokemonState',
@@ -10,12 +10,23 @@ export const pokemonState = atomFamily({
   }
 })
 
-export const filteredPokemonState = atomFamily({
-  key: 'filteredPokemonState',
-  default: async (type) => {
+export const filterPokemonState = atomFamily({
+  key: 'filterPokemonState',
+  default: async ({ state, limit, type }) => {
     // retrive pokemon type data
-    const { pokemon: results } = await pokemonTypeQuery(type)
+    const { pokemon: metadata = [] } = await pokemonTypeQuery(type)
+
+    // init default value
+    let results = []
+    if (state === 'init') {
+      const pokemonIds = metadata
+        .slice(0, limit)
+        .map(({ pokemon }) => pokemon.name)
+      results = await pokemonQueryByIds(pokemonIds)
+    }
+
     return {
+      metadata,
       results
     }
   }
