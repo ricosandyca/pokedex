@@ -3,7 +3,7 @@ A Pokédex app built with React
 
 ### Demo
 The app is already hosted on Vercel. You can check it out here:
-[https://pokedex2.vercel.app/](https://pokedex2.vercel.app/)
+[https://rcsn-pokedex.vercel.app/](https://rcsn-pokedex.vercel.app/)
 
 ### Main Library
 - React
